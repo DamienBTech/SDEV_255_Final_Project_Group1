@@ -1,20 +1,17 @@
 const express = require('express');
 const mongoose = require("mongoose");
+require('dotenv').config();
 const Course = require('./models/course');
-// const bootstrap = require('bootstrap')
 
 // express app
 const app = express();
 
-const dbURI = 'mongodb+srv://teacher:pass1234@cluster0.ieeefg9.mongodb.net/courses?retryWrites=true&w=majority'
+const dbURI = process.env.MONGO_DB_URI;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err))
 module.exports = mongoose;
 
-// login information:
-// student: user- student   pass- pass1234
-// Teacher user- teacher    teacher- pass1234
 
 // register view engine
 app.set('view engine', 'ejs')
