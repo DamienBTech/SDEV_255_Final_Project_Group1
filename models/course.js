@@ -1,7 +1,7 @@
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// creating course schem
+// creating course schema
 const courseSchema = new Schema({
     name: {
         type: String,
@@ -15,10 +15,6 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
-    students: {
-        type: Object,
-        required: true
-    },
 }, { timestamps: true });
 
 // model
@@ -30,9 +26,4 @@ module.exports = Course;
 //      name: "Math-122"
 //      description: "Teaching numbers."
 //      teacher: "Sue,"
-//      students: {
-//           "Mark",
-//           "Clara",
-//           "George"
-//      }
 // }

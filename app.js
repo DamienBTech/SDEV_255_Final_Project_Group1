@@ -1,12 +1,15 @@
 const express = require('express');
 const mongoose = require("mongoose");
-const Blog = require('./models/course');
+const Course = require('./models/course');
+// const bootstrap = require('bootstrap')
 
 // express app
 const app = express();
 
-const dbURI = 'mongodb+srv://student:pass1234@cluster0.ieeefg9.mongodb.net/?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true});
+const dbURI = 'mongodb+srv://teacher:pass1234@cluster0.ieeefg9.mongodb.net/courses?retryWrites=true&w=majority'
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result) => app.listen(3000))
+    .catch((err) => console.log(err))
 module.exports = mongoose;
 
 // login information:
@@ -16,18 +19,68 @@ module.exports = mongoose;
 // register view engine
 app.set('view engine', 'ejs')
 
-// listen for requests
-app.listen(3000);
+// middleware and static files
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }))
+
+// temp to test databases
+app.get('/add-course', (req, res) => {
+    const course = new Course({
+        name: 'SDEV-256',
+        description: 'Node',
+        teacher: 'New Teacher',
+    });
+
+    course.save()
+        .then((result) => {
+            res.send(result)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { title: 'Login' })
+});
+
+app.get('/shownCourses', (req, res) => {
+    res.redirect('courses')
+});
+
+app.get('/addCourse', (req, res) => {
+    res.render('addCourse', { title: 'Create Course' })
 });
 
 app.get('/courses', (req, res) => {
-    res.render('courses');
-});
+    Course.find().sort({ createdAt: -1 })
+        .then((result) => {
+            res.render('shownCourses', { title: 'Courses', courses: result })
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
+
+app.post('/courses', (req, res) => {
+    const course = new Course(req.body);
+    course.save()
+        .then((result) => {
+            res.redirect('courses');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
+app.delete('/shownCourses', (req, res) => {
+    console.log('hihihihi');
+})
+
 
 // 404 page 
 app.use((req, res) => {
-    res.status(404).render('404');
+    res.status(404).render('404', { title: '404 Page' });
 })
