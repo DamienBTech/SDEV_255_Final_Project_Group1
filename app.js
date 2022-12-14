@@ -72,9 +72,17 @@ app.post('/courses', (req, res) => {
         })
 })
 
-app.delete('/shownCourses', (req, res) => {
-    console.log('hihihihi');
-})
+app.delete('/shownCourses/:id', (req,res) =>{
+    const id = req.params.id;
+
+    Course.findByIdAndDelete(id)
+        .then(result => {
+            res.json({ redirect: '/shownCourses'})
+        })
+        .catch(err => {
+            console.log(err);
+        })
+  })
 
 
 // 404 page 
