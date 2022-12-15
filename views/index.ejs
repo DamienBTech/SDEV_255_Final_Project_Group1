@@ -4,9 +4,17 @@
   <nav>
       <%- include('./partials/pages.ejs') %>
   </nav>
-  <p class="login-text">
-    LOGIN
-  </p>
+  <form class="login-text">
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+
+    <button type="submit">Login</button>
+    <button type="submit">Sign Up</button>
+    <label>
+  </form>
 </body>
 
 </html>

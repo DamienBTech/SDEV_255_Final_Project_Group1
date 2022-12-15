@@ -7,7 +7,7 @@ const Course = require('./models/course');
 const app = express();
 
 const dbURI = process.env.MONGO_DB_URI;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(dbURI,  { useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err))
 module.exports = mongoose;
