@@ -20,10 +20,3 @@ const courseSchema = new Schema({
 // model
 const Course = mongoose.model('Course', courseSchema);
 module.exports = Course;
-
-// course:{ 
-//      id: 1, 
-//      name: "Math-122"
-//      description: "Teaching numbers."
-//      teacher: "Sue,"
-// }

@@ -2,19 +2,20 @@
 
 <body>
   <nav>
-      <%- include('./partials/pages.ejs') %>
+    <%- include('./partials/pages.ejs') %>
   </nav>
-  <form class="login-text">
+  <h2>Login</h2>
+  <form action="/login" method="POST" class="login-text">
     <label for="username"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="username" required>
 
     <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
 
+    <!-- should NOT be a post request below -->
     <button type="submit">Login</button>
-    <button type="submit">Sign Up</button>
-    <label>
   </form>
+  <button type="submit" onclick="location.href='/signUp';">New Here? Click to Signup!</button>
 </body>
 
 </html>

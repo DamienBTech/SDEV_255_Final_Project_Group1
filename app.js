@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require("mongoose");
 require('dotenv').config();
 const Course = require('./models/course');
+const User = require('./models/user');
 
 // express app
 const app = express();
@@ -21,21 +22,21 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }))
 
 // temp to test databases
-app.get('/add-course', (req, res) => {
-    const course = new Course({
-        name: 'SDEV-256',
-        description: 'Node',
-        teacher: 'New Teacher',
-    });
+// app.get('/add-course', (req, res) => {
+//     const course = new Course({
+//         name: 'SDEV-256',
+//         description: 'Node',
+//         teacher: 'New Teacher',
+//     });
 
-    course.save()
-        .then((result) => {
-            res.send(result)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
+//     course.save()
+//         .then((result) => {
+//             res.send(result)
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// });
 
 
 
@@ -71,6 +72,32 @@ app.post('/courses', (req, res) => {
             console.log(err);
         })
 })
+
+// NOT a post request below
+app.post('/login', (req, res) => {
+    console.log("LOGIN");
+    console.log(req.body);
+    console.log("run a check against the current database entries");
+    // if it does not match, give the user information that either the username or password does not match
+})
+
+app.get('/signUp', (req, res) => {
+    res.render('signUp', { title: 'Sign Up' })
+})
+
+// new account creation
+app.post('/', (req, res) => {
+    // it should DEFINITELY be encrypted, which Cam can take care of
+    const user = new User(req.body);
+    user.save()
+        .then((result) => {
+            res.redirect('courses');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
 
 app.delete('/shownCourses/:id', (req,res) =>{
     const id = req.params.id;
