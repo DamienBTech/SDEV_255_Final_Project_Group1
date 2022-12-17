@@ -66,7 +66,7 @@ app.get('/courses', (req, res) => {
 app.get('/checkout', (req, res) => {
     ShoppingCart.find().sort({createdAt: -1})
     .then((result) =>{
-        res.render('checkOut', { title: 'Check Out' })    
+        res.render('checkOut', { title: 'Check Out', carts: result })    
     })
     .catch((err) => {
         console.log(err)
