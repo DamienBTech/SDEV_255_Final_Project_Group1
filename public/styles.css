@@ -26,7 +26,7 @@ black
   position: relative;
   top: 0%;
   left: 0%;
-  width: 50%;
+  width: 40%;
   line-height: 250%;
   font-size: 25px;
   text-align: center;
@@ -36,14 +36,24 @@ black
 .link1 {
   position: absolute;
   top: 0%;
-  left: 50%;
-  width: 50%;
+  left: 40%;
+  width: 40%;
   line-height: 250%;
   font-size: 25px;
   text-align: center;
   background-color: #4DAA57;
 }
 
+.link2 {
+  position: absolute;
+  top: 0%;
+  left: 80%;
+  width: 20%;
+  line-height: 250%;
+  font-size: 25px;
+  text-align: center;
+  background-color: #B5DDA4;
+}
 
 .header {
   position: relative;
