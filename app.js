@@ -4,6 +4,7 @@ require('dotenv').config();
 const Course = require('./models/course');
 const User = require('./models/user');
 const ShoppingCart = require('./models/cart');
+const Schedule = require('./models/schedule');
 
 // express app
 const app = express();
@@ -73,6 +74,16 @@ app.get('/checkout', (req, res) => {
     })
 });
 
+app.get('/checkout', (req, res) => {
+    Schedule.find().sort({createdAt: -1})
+    .then((result) =>{
+        res.render('checkOut', { title: 'Check Out', schedule: result })    
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+});
+
 app.post('/courses', (req, res) => {
     const course = new Course(req.body);
     course.save()
@@ -85,7 +96,7 @@ app.post('/courses', (req, res) => {
 })
 
 app.post('/checkout', (req, res) => {
-    const cart = new Course(req.body);
+    const cart = new ShoppingCart(req.body);
     cart.save()
         .then((result) => {
             res.redirect('checkout');
@@ -94,6 +105,18 @@ app.post('/checkout', (req, res) => {
             console.log(err);
         })
 })
+
+app.post('/checkout', (req, res) => {
+    const schedule = new Schedule(req.body); s6
+    schedule.save()
+        .then((result) => {
+            res.redirect('checkout');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
 
 // NOT a post request below
 app.post('/login', (req, res) => {
