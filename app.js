@@ -64,7 +64,13 @@ app.get('/courses', (req, res) => {
 })
 
 app.get('/checkout', (req, res) => {
-    res.render('checkOut', { title: 'Check Out' })
+    ShoppingCart.find().sort({createdAt: -1})
+    .then((result) =>{
+        res.render('checkOut', { title: 'Check Out' })    
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 });
 
 app.post('/courses', (req, res) => {
@@ -72,6 +78,17 @@ app.post('/courses', (req, res) => {
     course.save()
         .then((result) => {
             res.redirect('courses');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
+app.post('/checkout', (req, res) => {
+    const cart = new Course(req.body);
+    cart.save()
+        .then((result) => {
+            res.redirect('checkout');
         })
         .catch((err) => {
             console.log(err);

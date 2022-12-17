@@ -6,15 +6,15 @@
   </nav>
   <h2 class="header">Shopping Cart</h2>
   <div class="cart-dropdown">
-    <% if (cart.length > 0) { %>
-        <% cart.forEach((course, index) => { %>
+    <% if (carts.length > 0) { %>
+        <% carts.forEach((cart, index) => { %>
           <div class="accordion-item-<%= index %> ">
             <h2 class="accordion-header" id="shopping-cart">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#course-<%= index %>">
-                <h3 class="name"><%= cart.name %></h3>
+                <h3 class="name"><%= carts.name %></h3>
               </button>
             </h2>
-            <div id="course-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#courses">
+            <div id="cart-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#courses">
               <div class="accordion-body">
                 <p class="description">Description: <%= cart.description %></p>
                 <p class="teacher">Teacher: <%= cart.teacher %></p>
@@ -27,28 +27,6 @@
                 <% }) %>
             <% } else { %>
                 <p>The cart is empty.</p>
-            <% } %>
-  </div>
-  <div class="schedule-dropdown">
-    <% if (schedule.length > 0) { %>
-        <% schedule.forEach((course, index) => { %>
-          <div class="accordion-item-<%= index %> ">
-            <h2 class="accordion-header" id="schedule">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#course-<%= index %>">
-                <h3 class="name"><%= schedule.name %></h3>
-              </button>
-            </h2>
-            <div id="course-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#courses">
-              <div class="accordion-body">
-                <p class="description">Description: <%= schedule.description %></p>
-                <p class="teacher">Teacher: <%= schedule.teacher %></p>
-                <p class="credits">Credits: <%= schedule.credits %></p>
-              </div>
-            </div>
-          </div>
-                <% }) %>
-            <% } else { %>
-                <p>The schedule is empty.</p>
             <% } %>
   </div>
 </body>
