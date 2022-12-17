@@ -107,7 +107,7 @@ app.post('/checkout', (req, res) => {
 })
 
 app.post('/checkout', (req, res) => {
-    const schedule = new Schedule(req.body); s6
+    const schedule = new Schedule(req.body);
     schedule.save()
         .then((result) => {
             res.redirect('checkout');
