@@ -1,0 +1,71 @@
+<%- include('./partials/header.ejs') %>
+
+<body>
+  <nav>
+      <%- include('./partials/pages.ejs') %>
+  </nav>
+  <h2 class="header">Shopping Cart</h2>
+  <div class="cart-dropdown">
+    <% if (cart.length > 0) { %>
+        <% cart.forEach((course, index) => { %>
+          <div class="accordion-item-<%= index %> ">
+            <h2 class="accordion-header" id="shopping-cart">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#course-<%= index %>">
+                <h3 class="name"><%= cart.name %></h3>
+              </button>
+            </h2>
+            <div id="course-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#courses">
+              <div class="accordion-body">
+                <p class="description">Description: <%= cart.description %></p>
+                <p class="teacher">Teacher: <%= cart.teacher %></p>
+                <p class="credits">Credits: <%= cart.credits %></p>
+                <button class="delete" data-doc="<%= cart._id %>">Delete</button>
+            
+              </div>
+            </div>
+          </div>
+                <% }) %>
+            <% } else { %>
+                <p>The cart is empty.</p>
+            <% } %>
+  </div>
+  <div class="schedule-dropdown">
+    <% if (schedule.length > 0) { %>
+        <% schedule.forEach((course, index) => { %>
+          <div class="accordion-item-<%= index %> ">
+            <h2 class="accordion-header" id="schedule">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#course-<%= index %>">
+                <h3 class="name"><%= schedule.name %></h3>
+              </button>
+            </h2>
+            <div id="course-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#courses">
+              <div class="accordion-body">
+                <p class="description">Description: <%= schedule.description %></p>
+                <p class="teacher">Teacher: <%= schedule.teacher %></p>
+                <p class="credits">Credits: <%= schedule.credits %></p>
+              </div>
+            </div>
+          </div>
+                <% }) %>
+            <% } else { %>
+                <p>The schedule is empty.</p>
+            <% } %>
+  </div>
+</body>
+<script>
+    const trashcan = document.querySelector('button.delete')
+
+    trashcan.addEventListener('click', (e) =>{
+      const endpoint = `/checkOut/${trashcan.dataset.doc}`;
+
+      fetch(endpoint, {
+        method: 'DELETE'
+      })
+      .then((response) => response.json())
+      .then((data) => window.location.href = data.redirect)
+      .catch(err => console.log(err));
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 const Course = require('./models/course');
 const User = require('./models/user');
+const ShoppingCart = require('./models/cart');
 
 // express app
 const app = express();
@@ -61,6 +62,10 @@ app.get('/courses', (req, res) => {
             console.log(err);
         });
 })
+
+app.get('/checkout', (req, res) => {
+    res.render('checkOut', { title: 'Check Out' })
+});
 
 app.post('/courses', (req, res) => {
     const course = new Course(req.body);
