@@ -74,10 +74,10 @@ app.get('/checkout', (req, res) => {
     })
 });
 
-app.get('/checkout', (req, res) => {
+app.get('/schedule', (req, res) => {
     Schedule.find().sort({createdAt: -1})
     .then((result) =>{
-        res.render('checkOut', { title: 'Check Out', schedule: result })    
+        res.render('schedule', { title: 'Schedule', schedules: result })    
     })
     .catch((err) => {
         console.log(err)
@@ -106,11 +106,11 @@ app.post('/checkout', (req, res) => {
         })
 })
 
-app.post('/checkout', (req, res) => {
+app.post('/schedule', (req, res) => {
     const schedule = new Schedule(req.body);
     schedule.save()
         .then((result) => {
-            res.redirect('checkout');
+            res.redirect('schedule');
         })
         .catch((err) => {
             console.log(err);
