@@ -119,11 +119,11 @@ app.post('/courses', (req, res) => {
         })
 })
 
-app.post('/carts/:id', (req, res) => {
-    const cart = new req.params.id;
+app.post('/carts', (req, res) => {
+    const cart = new ShoppingCart(req.body)
     cart.save()
         .then((result) => {
-            res.json({ redirect: '/checkout'});
+            res.redirect('/checkout');
         })
         .catch((err) => {
             console.log(err);

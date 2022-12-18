@@ -19,7 +19,7 @@
                 <p class="description">Description: <%= cart.description %></p>
                 <p class="teacher">Teacher: <%= cart.teacher %></p>
                 <p class="credits">Credits: <%= cart.credits %></p>
-                <button class="delete" data-doc="<%= cart._id %>">Delete</button>
+                <button actib class="delete" data-doc="<%= cart._id %>">Delete</button>
             
               </div>
             </div>
@@ -38,7 +38,7 @@
     const trashcan = document.querySelector('button.delete')
 
     trashcan.addEventListener('click', (e) =>{
-      const endpoint = `/checkOut/${trashcan.dataset.doc}`;
+      const endpoint = `/checkout/${trashcan.dataset.doc}`;
 
       fetch(endpoint, {
         method: 'DELETE'

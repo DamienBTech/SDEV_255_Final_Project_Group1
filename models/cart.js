@@ -7,11 +7,19 @@ const cartSchema = new Schema({
         type: String,
         required: true
     },
+    subject: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true
     },
     teacher: {
+        type: String,
+        required: true
+    },
+    credits: {
         type: String,
         required: true
     },

@@ -22,7 +22,7 @@
           <p class="teacher">Teacher: <%= course.teacher %></p>
           <p class="credits">Credits: <%= course.credits %></p>
           <button class="edit-<%= course._id %>" id="edit" onclick="location.href='/<%= course._id %>';">Edit</button>
-          <button class="addToCart" id="addToCart" data-doc="<%= course._id %>">Add to Cart</button>
+          <button action= "/carts" class="addToCart" id="addToCart"  data-doc="<%= course._id %>">Add to Cart</button>
 
         </div>
       </div>
@@ -34,10 +34,11 @@
   </div>
   <div onclick="location.href='/addCourse';" class="plus">+</div>
   <script>
-    const cartAdd = document.querySelector('button.addToCart')
+    const cartAdd = document.querySelector('button.addToCart');
   
     cartAdd.addEventListener('click', (e) =>{
-      const endpoint = `/checkout/${cartAdd.dataset.doc}`;
+
+      const endpoint = `/shownCourses/${cartAdd.dataset.doc}`;
   
       fetch(endpoint, {
         method: 'POST'
