@@ -10,7 +10,10 @@ const Schedule = require('./models/schedule');
 const app = express();
 
 const dbURI = process.env.MONGO_DB_URI;
-mongoose.connect(dbURI,  { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(dbURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err))
 module.exports = mongoose;
@@ -21,7 +24,9 @@ app.set('view engine', 'ejs')
 
 // middleware and static files
 app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({
+    extended: true
+}))
 
 // temp to test databases
 // app.get('/add-course', (req, res) => {
@@ -43,7 +48,9 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Login' })
+    res.render('index', {
+        title: 'Login'
+    })
 });
 
 app.get('/shownCourses', (req, res) => {
@@ -51,13 +58,20 @@ app.get('/shownCourses', (req, res) => {
 });
 
 app.get('/addCourse', (req, res) => {
-    res.render('addCourse', { title: 'Create Course' })
+    res.render('addCourse', {
+        title: 'Create Course'
+    })
 });
 
 app.get('/courses', (req, res) => {
-    Course.find().sort({ createdAt: -1 })
+    Course.find().sort({
+            createdAt: -1
+        })
         .then((result) => {
-            res.render('shownCourses', { title: 'Courses', courses: result })
+            res.render('shownCourses', {
+                title: 'Courses',
+                courses: result
+            })
         })
         .catch((err) => {
             console.log(err);
@@ -65,23 +79,33 @@ app.get('/courses', (req, res) => {
 })
 
 app.get('/checkout', (req, res) => {
-    ShoppingCart.find().sort({createdAt: -1})
-    .then((result) =>{
-        res.render('checkOut', { title: 'Check Out', carts: result })    
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+    ShoppingCart.find().sort({
+            createdAt: -1
+        })
+        .then((result) => {
+            res.render('checkOut', {
+                title: 'Check Out',
+                carts: result
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 });
 
 app.get('/schedule', (req, res) => {
-    Schedule.find().sort({createdAt: -1})
-    .then((result) =>{
-        res.render('schedule', { title: 'Schedule', schedules: result })    
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+    Schedule.find().sort({
+            createdAt: -1
+        })
+        .then((result) => {
+            res.render('schedule', {
+                title: 'Schedule',
+                schedules: result
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 });
 
 app.post('/courses', (req, res) => {
@@ -127,7 +151,9 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/signUp', (req, res) => {
-    res.render('signUp', { title: 'Sign Up' })
+    res.render('signUp', {
+        title: 'Sign Up'
+    })
 })
 
 // new account creation
@@ -144,21 +170,39 @@ app.post('/', (req, res) => {
 })
 
 
-
-app.delete('/shownCourses/:id', (req,res) =>{
+app.get('/:id', (req, res) => {
     const id = req.params.id;
-
-    Course.findByIdAndDelete(id)
+    Course.findById(id)
         .then(result => {
-            res.json({ redirect: '/shownCourses'})
+            res.render('details', {
+                course: result,
+                title: "Course Details"
+            })
         })
         .catch(err => {
             console.log(err);
         })
-  })
+});
+
+
+app.delete('/shownCourses/:id', (req, res) => {
+    const id = req.params.id;
+
+    Course.findByIdAndDelete(id)
+        .then(result => {
+            res.json({
+                redirect: '/shownCourses'
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+})
 
 
 // 404 page 
 app.use((req, res) => {
-    res.status(404).render('404', { title: '404 Page' });
+    res.status(404).render('404', {
+        title: '404 Page'
+    });
 })

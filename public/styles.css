@@ -67,7 +67,8 @@ black
   width: 100%;
 }
 
-.edit {
+/* MAY NOT END UP WORKING */
+/* .edit {
   position: relative;
   bottom: 90px;
   left: 94%;
@@ -77,9 +78,10 @@ black
 
 .edit:hover {
   background-color: #754668;
-}
+} */
 
-.delete {
+/* MAY NOT END UP WORKING */
+/* .delete {
   position: relative;
   bottom : 50px;
   left: 88.4%;
@@ -89,7 +91,7 @@ black
 
 .delete:hover {
   background-color: red;
-}
+} */
 
 .plus {
   position:relative;

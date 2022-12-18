@@ -1,9 +1,9 @@
 <%- include('./partials/header.ejs') %>
 
 <body>
-  <nav>
-      <%- include('./partials/pages.ejs') %>
-  </nav>
+    <nav>
+        <%- include('./partials/pages.ejs') %>
+    </nav>
     <h2 class="header">Create Course</h2>
     <div class="create-course content">
         <form action="/courses" method="POST">
@@ -17,8 +17,13 @@
             <input type="text" id="teacher" name="teacher" required>
             <label for="body">Number Of Credits:</label>
             <input type="text" id="credits" name="credits" required>
-            <button>Submit</button>
+            <button>Update</button>
         </form>
+            <script>
+                let nameInput = document.getElementById
+                let name = name.value;
+                console.log(name)
+            </script>
     </div>
 
 </body>
