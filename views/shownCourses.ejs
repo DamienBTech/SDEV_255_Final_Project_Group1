@@ -21,8 +21,8 @@
           <p class="description">Description: <%= course.description %></p>
           <p class="teacher">Teacher: <%= course.teacher %></p>
           <p class="credits">Credits: <%= course.credits %></p>
-          <button onclick="location.href='/<%= course._id %>';" class="edit-<%= course._id %>">Edit</button>
-          <button class="addToCart-<%= course._id %>" data-doc="<%= course._id %>">Add to Cart</button>
+          <button class="edit-<%= course._id %>" id="edit" onclick="location.href='/<%= course._id %>';">Edit</button>
+          <button class="addToCart-<%= course._id %>" id="addToCart" data-doc="<%= course._id %>">Add to Cart</button>
 
         </div>
       </div>
