@@ -7,42 +7,19 @@
     <h2 class="header">Update Course</h2>
     <div class="update-course content">
         <label for="title">Course Name:</label>
-        <input type="text" id="name" name="name" value="<%= course.name %>" required>
+        <input type="text" id="name" name="name" value="<%= course.name %>" placeholder="Enter Course Name" required>
         <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" value="<%= course.subject %>" required>
+        <input type="text" id="subject" name="subject" value="<%= course.subject %>" placeholder="Enter Subject" required>
         <label for="description">Course Description:</label>
-        <input type="text" id="description" name="description" value="<%= course.description %>" required>
+        <input type="text" id="description" name="description" value="<%= course.description %>" placeholder="Enter Description" required>
         <label for="body">Course Teacher:</label>
-        <input type="text" id="teacher" name="teacher" value="<%= course.teacher %>" required>
+        <input type="text" id="teacher" name="teacher" value="<%= course.teacher %>" placeholder="Enter Teacher Name" required>
         <label for="body">Number Of Credits:</label>
-        <input type="text" id="credits" name="credits" value="<%= course.credits %>" required>
-        <!-- <button class="update-course">Update</button> -->
+        <input type="text" id="credits" name="credits" value="<%= course.credits %>" placeholder="Enter Credits" required>
         <button class="update-course" data-doc="<%= course._id %>">Update</button>
     </div>
     <button class="delete-course" data-doc="<%= course._id %>">Delete</button>
 
-    <script>
-        const update = document.querySelector('button.update-course')
-        // const test = document.getElementById(name)
-
-        update.addEventListener('click', (e) => {
-            const endpoint = `/courses/${trashcan.dataset.doc}`;
-            const requestOptions = {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: "user"
-                })
-            };
-
-            fetch(endpoint, requestOptions)
-                .then((response) => response.json())
-                .then((data) => console.log(data))
-                .catch(err => console.log(err));
-        })
-    </script>
 
     <script>
         const trashcan = document.querySelector('button.delete-course')

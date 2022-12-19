@@ -21,14 +21,8 @@
           <p class="description">Description: <%= course.description %></p>
           <p class="teacher">Teacher: <%= course.teacher %></p>
           <p class="credits">Credits: <%= course.credits %></p>
-<<<<<<< HEAD
-          <button class="edit-<%= course._id %>" id="edit" onclick="location.href='/<%= course._id %>';">Edit</button>
-          <button action= "/carts" class="addToCart" id="addToCart"  data-doc="<%= course._id %>">Add to Cart</button>
-
-=======
           <button class="edit-<%= course._id %>" id="edit" onclick="location.href='/courses/<%= course._id %>';">Edit</button>
           <button class="addToCart>" id="addToCart" data-doc="<%= course._id %>">Add to Cart</button>
->>>>>>> aa0b1912978c128f4df1059639297f2bac63f822
         </div>
       </div>
     </div>
@@ -57,21 +51,6 @@
 
 </body>
 
-
-<!-- <script>
-    const trashcan = document.querySelector('button.delete')
-
-    trashcan.addEventListener('click', (e) =>{
-      const endpoint = `/shownCourses/${trashcan.dataset.doc}`;
-
-      fetch(endpoint, {
-        method: 'DELETE'
-      })
-      .then((response) => response.json())
-      .then((data) => window.location.href = data.redirect)
-      .catch(err => console.log(err));
-    })
-</script> -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 const Course = require('./models/course');
 const User = require('./models/user');
@@ -37,15 +38,18 @@ app.get('/', (req, res) => {
 
 // new account creation
 app.post('/', (req, res) => {
-    // it should DEFINITELY be encrypted, which Cam can take care of
-    const user = new User(req.body);
-    user.save()
-        .then((result) => {
-            res.redirect('courses');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+    bcrypt.hash(req.body.password, 12)
+        .then(hash => {
+            req.body.password = hash;
+            const user = new User(req.body);
+            user.save()
+                .then((result) => {
+                    res.redirect('courses');
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        });
 })
 
 app.get('/courses', (req, res) => {
@@ -125,17 +129,6 @@ app.get('/schedule', (req, res) => {
         })
 });
 
-<<<<<<< HEAD
-app.post('/courses', (req, res) => {
-    const course = new Course(req.body);
-    course.save()
-        .then((result) => {
-            res.redirect('courses');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-})
 
 app.post('/carts', (req, res) => {
     const cart = new ShoppingCart(req.body)
@@ -148,8 +141,6 @@ app.post('/carts', (req, res) => {
         })
 })
 
-=======
->>>>>>> aa0b1912978c128f4df1059639297f2bac63f822
 app.post('/schedule', (req, res) => {
     const schedule = new Schedule(req.body);
     schedule.save()
@@ -161,16 +152,8 @@ app.post('/schedule', (req, res) => {
         })
 })
 
-
-
-
-
-// NOT a post request below
+// did not get to work
 app.post('/login', (req, res) => {
-    console.log("LOGIN");
-    console.log(req.body);
-    console.log("run a check against the current database entries");
-    // if it does not match, give the user information that either the username or password does not match
 })
 
 app.get('/signUp', (req, res) => {
@@ -179,10 +162,7 @@ app.get('/signUp', (req, res) => {
     })
 })
 
-
-
 app.get('/courses/:id', (req, res) => {
-    console.log("got-it-1");
     const id = req.params.id;
     Course.findById(id)
         .then(result => {
@@ -196,15 +176,13 @@ app.get('/courses/:id', (req, res) => {
         })
 });
 
+// did not get to update
 app.put('/:id', (req, res) => {
-    console.log("got-it-2");
     console.log(req.body);
-    // res.send(req.body)
 });
 
 
 app.delete('/courses/:id', (req, res) => {
-    console.log("got-it-3");
     const id = req.params.id;
 
     Course.findByIdAndDelete(id)
@@ -217,7 +195,6 @@ app.delete('/courses/:id', (req, res) => {
             console.log(err);
         })
 })
-
 
 // 404 page 
 app.use((req, res) => {

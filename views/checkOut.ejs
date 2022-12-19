@@ -19,20 +19,17 @@
                 <p class="description">Description: <%= cart.description %></p>
                 <p class="teacher">Teacher: <%= cart.teacher %></p>
                 <p class="credits">Credits: <%= cart.credits %></p>
-                <button actib class="delete" data-doc="<%= cart._id %>">Delete</button>
+                <button class="delete" data-doc="<%= cart._id %>">Delete</button>
             
               </div>
             </div>
           </div>
                 <% }) %>
             <% } else { %>
-                <p>The cart is empty.</p>
+              <p class="empty">The cart is empty.</p>
             <% } %>
-<br>
-            <div>
-              <button type="submit" onclick="location.href='/schedule';">Go to Schedule</button>
-            </div>
-            <button class="push" data-push="">Push to Schedule</button>
+  <button class="checkout-button" type="submit" onclick="location.href='/schedule';">Go to Schedule</button>
+  <button class="checkout-button" data-push="">Push to Schedule</button>
 </body>
 <script>
     const trashcan = document.querySelector('button.delete')

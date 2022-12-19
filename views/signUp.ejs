@@ -4,18 +4,18 @@
   <nav>
     <%- include('./partials/pages.ejs') %>
   </nav>
-  <h2>Sign Up</h2>
+  <h2 class="header">Sign Up</h2>
   <form action="/" method="POST" class="login-text">
-    <label for="username"><b>New Username</b></label>
+    <label for="username">New Username</label>
     <input type="text" placeholder="Enter New Username" name="username" required>
 
-    <label for="password"><b>New Password</b></label>
+    <label for="password">New Password</label>
     <input type="password" placeholder="Enter New Password" name="password" required>
 
     <!-- should NOT be a post request below -->
     <button type="submit">Signup</button>
   </form>
-  <button type="submit" onclick="location.href='/';">Back to Login</button>
+  <button type="submit" class="other" onclick="location.href='/';">Back to Login</button>
 </body>
 
 </html>
