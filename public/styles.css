@@ -58,7 +58,7 @@ black
 .header {
   position: relative;
   text-align: center;
-  top: 70px;
+  top: 60px;
 }
 
 .courses-dropdown {
@@ -107,21 +107,51 @@ black
 .create-course label{
   position: relative;
   display: block;
-  top: 70px;
+  top: 50px;
   left: 35%;
   width: 30%;
   margin: 10px 0;
-  padding: 8px;
+  padding: 6px;
+}
+
+.create-course button{
+  position: relative;
+  margin-top: 20px;
+  top: 50px;
+  left: 47.5%;
+  background: #4DAA57;
+  color: white;
+  padding: 6px;
+  border: 0;
+  font-size: 1.2em;
+  cursor: pointer;
+
+}
+
+.create-course button:hover {
+  background-color: #754668;
 }
 
 textarea{
   height: 120px;
 }
 
-.create-course button{
+.update-course input,
+.update-course textarea,
+.update-course label{
+  position: relative;
+  display: block;
+  top: 50px;
+  left: 35%;
+  width: 30%;
+  margin: 10px 0;
+  padding: 6px;
+}
+
+.update-course button{
   position: relative;
   margin-top: 20px;
-  top: 70px;
+  top: 50px;
   left: 47.5%;
   background: #4DAA57;
   color: white;
@@ -131,11 +161,26 @@ textarea{
   cursor: pointer;
 }
 
-.create-course button:hover {
+.update-course button:hover {
   background-color: #754668;
 }
 
+.delete-course {
+  position: absolute;
+  margin-top: 20px;
+  top: 70px;
+  left: 93%;
+  background: #4DAA57;
+  color: white;
+  padding: 6px;
+  border: 0;
+  font-size: 1.2em;
+  cursor: pointer;
+}
 
+.delete-course:hover {
+  background-color: red;
+}
 
 .login-text {
   position: absolute;
