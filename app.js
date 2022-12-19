@@ -28,24 +28,6 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-// temp to test databases
-// app.get('/add-course', (req, res) => {
-//     const course = new Course({
-//         name: 'SDEV-256',
-//         description: 'Node',
-//         teacher: 'New Teacher',
-//     });
-
-//     course.save()
-//         .then((result) => {
-//             res.send(result)
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-// });
-
-
 
 app.get('/', (req, res) => {
     res.render('index', {
@@ -53,15 +35,18 @@ app.get('/', (req, res) => {
     })
 });
 
-app.get('/shownCourses', (req, res) => {
-    res.redirect('courses')
-});
-
-app.get('/addCourse', (req, res) => {
-    res.render('addCourse', {
-        title: 'Create Course'
-    })
-});
+// new account creation
+app.post('/', (req, res) => {
+    // it should DEFINITELY be encrypted, which Cam can take care of
+    const user = new User(req.body);
+    user.save()
+        .then((result) => {
+            res.redirect('courses');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
 
 app.get('/courses', (req, res) => {
     Course.find().sort({
@@ -78,6 +63,27 @@ app.get('/courses', (req, res) => {
         });
 })
 
+app.post('/courses', (req, res) => {
+    const course = new Course(req.body);
+    course.save()
+        .then((result) => {
+            res.redirect('courses');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
+
+app.get('/shownCourses', (req, res) => {
+    res.redirect('courses')
+});
+
+app.get('/addCourse', (req, res) => {
+    res.render('addCourse', {
+        title: 'Create Course'
+    })
+});
+
 app.get('/checkout', (req, res) => {
     ShoppingCart.find().sort({
             createdAt: -1
@@ -92,6 +98,17 @@ app.get('/checkout', (req, res) => {
             console.log(err)
         })
 });
+
+app.post('/checkout', (req, res) => {
+    const cart = new ShoppingCart(req.body);
+    cart.save()
+        .then((result) => {
+            res.redirect('checkout');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
 
 app.get('/schedule', (req, res) => {
     Schedule.find().sort({
@@ -108,6 +125,7 @@ app.get('/schedule', (req, res) => {
         })
 });
 
+<<<<<<< HEAD
 app.post('/courses', (req, res) => {
     const course = new Course(req.body);
     course.save()
@@ -130,6 +148,8 @@ app.post('/carts', (req, res) => {
         })
 })
 
+=======
+>>>>>>> aa0b1912978c128f4df1059639297f2bac63f822
 app.post('/schedule', (req, res) => {
     const schedule = new Schedule(req.body);
     schedule.save()
@@ -140,6 +160,9 @@ app.post('/schedule', (req, res) => {
             console.log(err);
         })
 })
+
+
+
 
 
 // NOT a post request below
@@ -156,21 +179,10 @@ app.get('/signUp', (req, res) => {
     })
 })
 
-// new account creation
-app.post('/', (req, res) => {
-    // it should DEFINITELY be encrypted, which Cam can take care of
-    const user = new User(req.body);
-    user.save()
-        .then((result) => {
-            res.redirect('courses');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-})
 
 
-app.get('/:id', (req, res) => {
+app.get('/courses/:id', (req, res) => {
+    console.log("got-it-1");
     const id = req.params.id;
     Course.findById(id)
         .then(result => {
@@ -184,8 +196,15 @@ app.get('/:id', (req, res) => {
         })
 });
 
+app.put('/:id', (req, res) => {
+    console.log("got-it-2");
+    console.log(req.body);
+    // res.send(req.body)
+});
 
-app.delete('/shownCourses/:id', (req, res) => {
+
+app.delete('/courses/:id', (req, res) => {
+    console.log("got-it-3");
     const id = req.params.id;
 
     Course.findByIdAndDelete(id)
